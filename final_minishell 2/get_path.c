@@ -6,7 +6,7 @@
 /*   By: dnetshik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 09:34:13 by dnetshik          #+#    #+#             */
-/*   Updated: 2017/09/12 15:31:58 by dnetshik         ###   ########.fr       */
+/*   Updated: 2017/09/13 09:41:30 by dnetshik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,17 @@ void       func(char *temp, char **s, char **args, char **env)
 }
 void		get_path(char **env, char **args)
 {
-	char	*path;
-	char 	**s;
-	int  i;
-	char 	*tmp;
-	char 	*prog;
+    struct  paths   val;
 
-	i = 0;
-	path = NULL;
-	while (env[i])
+	val.i = 0;
+	val.path = NULL;
+	while (env[val.i])
 	{
-		if (strncmp("PATH=", env[i], 5) == 0)
-			path = ft_strdup(env[i]);
-		i++;
+		if (ft_strncmp("PATH=", env[val.i], 5) == 0)
+			val.path = ft_strdup(env[val.i]);
+		val.i++;
 	}
-	if (path == NULL)
+	if (val.path == NULL)
 	{
 		if (access(args[0], X_OK) == 0)
 			ft_exec(args[0], args, env);
@@ -69,18 +65,7 @@ void		get_path(char **env, char **args)
 			printf("minishell: command not found: %s\n", args[0]);
 		return ;
 	}
-	path = ft_strdup(ft_strchr(path, '/'));
-	s = ft_strsplit(path, ':');
-/*	i = 0;
-	prog = NULL;
-	while (s[i])
-	{
-		tmp = ft_strjoin(s[i], "/");
-		tmp= ft_strjoin(tmp, args[0]);
-		if (access(tmp, X_OK) == 0)
-			prog = ft_strdup(tmp);
-		i++;
-	}
-	ft_exec(prog, args, env);*/
-    func(tmp, s, args, env);
+	val.path = ft_strdup(ft_strchr(val.path, '/'));
+	val.s = ft_strsplit(val.path, ':');
+    func(val.tmp, val.s, args, env);
 }

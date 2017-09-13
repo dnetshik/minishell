@@ -6,7 +6,7 @@
 /*   By: dnetshik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 09:36:06 by dnetshik          #+#    #+#             */
-/*   Updated: 2017/09/07 09:27:09 by dnetshik         ###   ########.fr       */
+/*   Updated: 2017/09/13 09:36:16 by dnetshik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+
+struct  paths
+{
+    char    *path;
+    char    **s;
+    int     i;
+    char    *tmp;
+    char    *prog;
+};
 
 int		free_args(char **arr);
 char	**ft_unsetenv(char **env, char *key);
