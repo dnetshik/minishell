@@ -6,7 +6,7 @@
 /*   By: dnetshik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 09:28:28 by dnetshik          #+#    #+#             */
-/*   Updated: 2017/09/13 13:26:29 by dnetshik         ###   ########.fr       */
+/*   Updated: 2017/09/13 14:53:27 by dnetshik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ int		main(void)
 {
 	char 	**g_env;
 
-    //ft_putstr("shell---");
 	g_env = init_env();
-    //ft_putstr("->");
 	while (1)
 	{
         ft_putstr(" \033[31mshell--\033[0m\033[32m>>\033[0m\033[33m...\033[0m ");

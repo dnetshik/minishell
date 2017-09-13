@@ -6,7 +6,7 @@
 /*   By: dnetshik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 09:34:13 by dnetshik          #+#    #+#             */
-/*   Updated: 2017/09/13 09:41:30 by dnetshik         ###   ########.fr       */
+/*   Updated: 2017/09/13 15:06:42 by dnetshik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,15 @@ void       func(char *temp, char **s, char **args, char **env)
     {
         temp = ft_strjoin(s[i], "/");
         temp = ft_strjoin(temp, args[0]);
+        if (ft_strcmp(s[i], args[0]))
+            temp = ft_strdup(args[0]);
         if(access(temp, X_OK) == 0)
             prog = ft_strdup(temp);
         i++;
     }
     ft_exec(prog, args, env);
 }
+
 void		get_path(char **env, char **args)
 {
     struct  paths   val;
