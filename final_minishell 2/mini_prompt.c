@@ -6,7 +6,7 @@
 /*   By: dnetshik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 09:24:40 by dnetshik          #+#    #+#             */
-/*   Updated: 2017/09/13 12:54:11 by dnetshik         ###   ########.fr       */
+/*   Updated: 2017/09/13 13:27:43 by dnetshik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,28 @@
 
 int			prompt(char ***env)
 {
-	char	line[4096];
-	char	**args;
-	int		r;
+    struct  paths   val;
 
-	ft_putstr(" \033[31mMy own\033[0m\033[32m-ls\033[0m\033[33m->>\033[0m ");
-	r = read(0, line, 4096);
-	line[r - 1] = '\0';
-    if (ft_strlen(line))
+	val.r = read(0, val.line, 4096);
+	val.line[val.r - 1] = '\0';
+    if (ft_strlen(val.line))
     {
-	     args = ft_strsplit(line, ' ');
-	    if (ft_strcmp(args[0], "exit") == 0)
+	     val.args = ft_strsplit(val.line, ' ');
+	    if (ft_strcmp(val.args[0], "exit") == 0)
 		    exit(-1);
-	    else if ((ft_strcmp(args[0], "echo") == 0) && (args[1][0] != '$'))
-		    echo_func(args);
-	    else if ((ft_strcmp(args[0], "echo") == 0) && (args[1][0] == '$'))
-		    get_environ(args, *env);
-	    else if (ft_strcmp(args[0], "env") == 0)
+	    else if ((ft_strcmp(val.args[0], "echo") == 0) && (val.args[1][0] != '$'))
+		    echo_func(val.args);
+	    else if ((ft_strcmp(val.args[0], "echo") == 0) && (val.args[1][0] == '$'))
+		    get_environ(val.args, *env);
+	    else if (ft_strcmp(val.args[0], "env") == 0)
 		    get_env(*env);
-	    else if (ft_strcmp(args[0], "setenv") == 0)
-		    *env = setv(*env, args[1], args[2]);
-	    else if (ft_strcmp(args[0], "unsetenv") == 0)
-		    *env = ft_unsetenv(*env, args[1]);
+	    else if (ft_strcmp(val.args[0], "setenv") == 0)
+		    *env = setv(*env, val.args[1], val.args[2]);
+	    else if (ft_strcmp(val.args[0], "unsetenv") == 0)
+		    *env = ft_unsetenv(*env, val.args[1]);
 	    else
-		    get_path(*env, args);
-	    free_args(args);
+		    get_path(*env, val.args);
+	    free_args(val.args);
     }
     return (1);
 }

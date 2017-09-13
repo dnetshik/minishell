@@ -6,7 +6,7 @@
 /*   By: dnetshik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 09:36:06 by dnetshik          #+#    #+#             */
-/*   Updated: 2017/09/13 09:36:16 by dnetshik         ###   ########.fr       */
+/*   Updated: 2017/09/13 13:10:28 by dnetshik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ struct  paths
     int     i;
     char    *tmp;
     char    *prog;
+    char    line[4096];
+    char    **args;
+    int     r;
 };
 
 int		free_args(char **arr);
